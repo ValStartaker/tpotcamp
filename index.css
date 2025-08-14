@@ -257,6 +257,15 @@ textarea {
 }
 
 @media (max-width: 768px) {
+
+  body {
+    background-color: white;
+  }
+
+  #map {
+    width: 80%;
+    margin: 0 auto;
+  }
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -267,6 +276,46 @@ textarea {
 
   .container {
     padding: 10px;
+  }
+
+  .map-section {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .events-section {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .form-section {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header {
+    box-shadow: none;
+  }
+
+  .institution-item {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .institution-item:hover {
+    box-shadow: none;
+  }
+
+  .event-item {
+    border-radius: 0;
+  }
+
+  .event-item:hover {
+    box-shadow: none;
+  }
+
+  .event-type {
+    border-radius: 0;
   }
 
   .legend {
@@ -304,13 +353,6 @@ textarea {
   line-height: 1.4;
 }
 
-.events-section {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-}
 
 .events-section h2 {
   color: #2c3e50;
