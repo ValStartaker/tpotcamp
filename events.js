@@ -2,7 +2,8 @@ const eventsData = [
   {
     "name": "Test Event",
     "type": "camp",
-    "date": "2025-08-18",
+    "startDate": "2025-08-18",
+    "endDate": "2025-08-22",
     "time": "18:00",
     "lat": 40.778879,
     "lng": -73.967737,
@@ -13,7 +14,7 @@ const eventsData = [
   {
     "name": "Test Event 2",
     "type": "fractalido",
-    "date": "2025-08-18",
+    "startDate": "2025-08-18",
     "time": "18:00",
     "lat": 51.501018,
     "lng": -0.125966,
