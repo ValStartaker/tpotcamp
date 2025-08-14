@@ -118,7 +118,7 @@ textarea {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: #e11d48;
   color: white;
   padding: 15px 30px;
   border: none;
@@ -144,17 +144,19 @@ textarea {
   padding: 15px;
   margin: 15px 0;
   border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .legend h3 {
-  margin-bottom: 10px;
   color: #2c3e50;
+  margin-right: 8px
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-left: 8px;
 }
 
 .legend-icon {
@@ -173,11 +175,85 @@ textarea {
 .grouphouse {
   background-color: #9b59b6;
 }
-.institution {
+.fractalido {
   background-color: #27ae60;
 }
 .misc {
   background-color: #3498db;
+}
+
+/* Institutions page styles */
+.institutions-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.institution-item {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.institution-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.institution-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.institution-name {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.institution-type {
+  background: #ecf0f1;
+  color: #7f8c8d;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.institution-description {
+  color: #34495e;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.institution-address,
+.institution-link,
+.institution-contact {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.institution-address span:first-child,
+.institution-link span:first-child,
+.institution-contact span:first-child {
+  margin-right: 8px;
+}
+
+.institution-link a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.institution-link a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -191,6 +267,20 @@ textarea {
 
   .container {
     padding: 10px;
+  }
+
+  .legend {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .legend-item {
+    margin-left: 0;
+    margin-bottom: 8px;
+  }
+
+  .legend-item:first-child {
+    margin-bottom: 12px;
   }
 }
 
@@ -251,7 +341,7 @@ textarea {
 .event-item.grouphouse {
   border-left-color: #9b59b6;
 }
-.event-item.institution {
+.event-item.fractalido {
   border-left-color: #27ae60;
 }
 .event-item.misc {
@@ -293,7 +383,7 @@ textarea {
 .event-type.grouphouse {
   background-color: #9b59b6;
 }
-.event-type.institution {
+.event-type.fractalido {
   background-color: #27ae60;
 }
 .event-type.misc {

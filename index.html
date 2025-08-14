@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Community Events Map</title>
+    <title>tpot.camp</title>
 
     <link rel="stylesheet" href="index.css" />
     <link
@@ -11,7 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script src="event_list.json"></script>
+    <script src="events.js"></script>
   </head>
 
   <body>
@@ -22,27 +22,35 @@
 
     <main class="container">
       <div class="map-section">
-        <div class="legend">
-          <h3>Event Types</h3>
-          <div class="legend-item">
-            <div class="legend-icon camp"></div>
-            <span>Camp</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon meetup"></div>
-            <span>Meetup</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon grouphouse"></div>
-            <span>Group House</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon institution"></div>
-            <span>Institution</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon misc"></div>
-            <span>Misc</span>
+        <div class="legend-container">
+          <div class="legend">
+            <div class="legend-item">
+              <h3>Event Types</h3>
+            </div>
+            <div class="legend-item">
+              <div class="legend-icon camp"></div>
+              <span>Camp</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-icon meetup"></div>
+              <span>Meetup</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-icon grouphouse"></div>
+              <span>Group House</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-icon fractalido"></div>
+              <span>Fractalido</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-icon misc"></div>
+              <span>Misc</span>
+            </div>
+            <div class="legend-item">
+              <a href="institutions.html" style="color: #3498db; text-decoration: none; font-size: 0.9em; margin-left: 10px;">View Institutions →</a>
+            </div>
+            
           </div>
         </div>
         <div id="map"></div>
@@ -62,7 +70,7 @@
 
         <!-- Replace YOUR_FORM_ID with your actual Formspree form ID -->
         <form
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://formspree.io/f/xgvzqwlg"
           method="POST"
           id="eventForm"
         >
@@ -76,11 +84,11 @@
               <label for="eventType">Event Type *</label>
               <select id="eventType" name="eventType" required>
                 <option value="">Select type...</option>
-                <option value="music">Music & Entertainment</option>
-                <option value="food">Food & Drink</option>
-                <option value="art">Arts & Culture</option>
-                <option value="sports">Sports & Recreation</option>
-                <option value="community">Community & Social</option>
+                <option value="camp">Camp</option>
+                <option value="meetup">Meetup</option>
+                <option value="grouphouse">Group House</option>
+                <option value="fractalido">Fractalido</option>
+                <option value="Misc">Misc</option>
               </select>
             </div>
 
@@ -157,7 +165,7 @@
 
     <footer class="footer">
       <p>
-        &copy; 2025, @AletheiaAsriel, @actualwebutante, @seventhmeal,
+        &copy; 2025, maintained by @AletheiaAsriel, help and vibes from @actualwebutante, @seventhmeal and
         @AbsurdistFool
       </p>
     </footer>
@@ -174,33 +182,60 @@
         camp: "#e74c3c",
         meetup: "#f39c12",
         grouphouse: "#9b59b6",
-        institution: "#27ae60",
+        fractalido: "#27ae60",
         misc: "#3498db",
       };
 
-      const events = [
-        {
-          name: "Test Event",
-          type: "camp",
-          date: "2025-08-18",
-          time: "18:00",
-          lat: 40.778879,
-          lng: -73.967737,
-          description: "test event",
-          address: "Central Park, New York, NY",
-        },
-        {
-          name: "Test Event 2",
-          type: "institution",
-          date: "2025-08-18",
-          time: "18:00",
-          lat: 51.501018,
-          lng: -0.125966,
-          description: "test event",
-          address: "Westminster, London, UK",
-        },
-      ];
+      let events = [];
 
+      // load events from JS file
+      function loadEvents() {
+        events = eventsData;
+        renderEventsList();
+        renderMapMarkers();
+      }
+
+      // render map markers
+      function renderMapMarkers() {
+        events.forEach((event) => {
+          const marker = L.circleMarker([event.lat, event.lng], {
+            radius: 12,
+            fillColor: eventColors[event.type],
+            color: "#fff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.8,
+          }).addTo(map);
+
+          const popupContent = `
+                <div class="popup-content">
+                    <h3>${event.name}</h3>
+                    <div class="date">${new Date(
+                      event.date
+                    ).toLocaleDateString()}</div>
+                    <div class="time">${
+                      event.time
+                        ? new Date(
+                            `2000-01-01T${event.time}`
+                          ).toLocaleTimeString([], {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : ""
+                    }</div>
+                    <div class="description">${event.description}</div>
+                    <div style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">
+                        📍 ${event.address}
+                    </div>
+                    ${event.website ? `<div style="margin-top: 8px;">
+                        🔗 <a href="${event.website}" target="_blank" rel="noopener noreferrer" style="color: #3498db; text-decoration: none;">${event.website}</a>
+                    </div>` : ''}
+                </div>
+            `;
+
+          marker.bindPopup(popupContent);
+        });
+      }
 
       // create event list
       function renderEventsList() {
@@ -258,6 +293,10 @@
                 <span>📍</span>
                 <span>${event.address}</span>
               </div>
+              ${event.website ? `<div class="event-link">
+                <span>🔗</span>
+                <a href="${event.website}" target="_blank" rel="noopener noreferrer">${event.website}</a>
+              </div>` : ''}
             </div>
           `;
           })
@@ -266,46 +305,9 @@
         eventsListContainer.innerHTML = eventsHTML;
       }
 
+      // load events on page load
+      loadEvents();
 
-      // render map markers
-      events.forEach((event) => {
-        const marker = L.circleMarker([event.lat, event.lng], {
-          radius: 12,
-          fillColor: eventColors[event.type],
-          color: "#fff",
-          weight: 2,
-          opacity: 1,
-          fillOpacity: 0.8,
-        }).addTo(map);
-
-        const popupContent = `
-                <div class="popup-content">
-                    <h3>${event.name}</h3>
-                    <div class="date">${new Date(
-                      event.date
-                    ).toLocaleDateString()}</div>
-                    <div class="time">${
-                      event.time
-                        ? new Date(
-                            `2000-01-01T${event.time}`
-                          ).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : ""
-                    }</div>
-                    <div class="description">${event.description}</div>
-                    <div style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">
-                        📍 ${event.address}
-                    </div>
-                </div>
-            `;
-
-        marker.bindPopup(popupContent);
-      });
-
-      // render the events list on page load
-      renderEventsList();
 
       const form = document.getElementById("eventForm");
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Institutions - tpot.camp</title>
+
+    <link rel="stylesheet" href="index.css" />
+    <script src="institutions.js"></script>
+  </head>
+
+  <body>
+    <nav class="header">
+      <h1>tpot.camp</h1>
+      <p>See permanent institutions hosting events</p>
+      <div style="margin-top: 10px;">
+        <a href="index.html" style="color: #3498db; text-decoration: none;">← Back to Map</a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="institutions-section">
+        <h2>Permanent Institutions</h2>
+        <p style="margin-bottom: 30px; color: #7f8c8d">
+          These institutions regularly host or organize community events.
+        </p>
+        <div id="institutionsList"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>
+        &copy; 2025, maintained by @AletheiaAsriel, help and vibes from @actualwebutante, @seventhmeal and
+        @AbsurdistFool
+      </p>
+    </footer>
+
+    <script>
+      // load institutions from JS file
+      function loadInstitutions() {
+        renderInstitutionsList();
+      }
+
+      // render institutions list
+      function renderInstitutionsList() {
+        const institutionsListContainer = document.getElementById("institutionsList");
+
+        if (institutionsData.length === 0) {
+          institutionsListContainer.innerHTML =
+            '<div class="no-events">No institutions listed.</div>';
+          return;
+        }
+
+        const institutionsHTML = institutionsData
+          .map((institution) => {
+            return `
+            <div class="institution-item">
+              <div class="institution-header">
+                <h3 class="institution-name">${institution.name}</h3>
+              </div>
+              <div class="institution-description">${institution.description}</div>
+              <div class="institution-address">
+                <span>📍</span>
+                <span>${institution.address}</span>
+              </div>
+              ${institution.website ? `<div class="institution-link">
+                <span>🔗</span>
+                <a href="${institution.website}" target="_blank" rel="noopener noreferrer">${institution.website}</a>
+              </div>` : ''}
+              ${institution.contact ? `<div class="institution-contact">
+                <span>📧</span>
+                <span>${institution.contact}</span>
+              </div>` : ''}
+            </div>
+          `;
+          })
+          .join("");
+
+        institutionsListContainer.innerHTML = institutionsHTML;
+      }
+
+      // load institutions on page load
+      loadInstitutions();
+    </script>
+  </body>
+</html>
