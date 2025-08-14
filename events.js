@@ -1,25 +1,13 @@
 const eventsData = [
   {
-    "name": "Test Event",
+    "name": "Meditation Camp",
     "type": "camp",
-    "startDate": "2025-08-18",
-    "endDate": "2025-08-22",
-    "time": "18:00",
-    "lat": 40.778879,
-    "lng": -73.967737,
-    "description": "test event",
+    "startDate": "2026-03-03",
+    "endDate": "2026-03-08",
+    "lat": 32.283157721057904,
+    "lng": -64.82098208176512,
+    "description": "It's a camp. For meditation nerds. But despite all the meditating it's not a retreat it's a camp so bbq and beers all evening, naturally. Oh and scuba diving. Or just swimming. And talking about meditating instead of actually meditating.",
     "address": "Central Park, New York, NY",
-    "website": "https://example.com/test-event"
-  },
-  {
-    "name": "Test Event 2",
-    "type": "fractalido",
-    "startDate": "2025-08-18",
-    "time": "18:00",
-    "lat": 51.501018,
-    "lng": -0.125966,
-    "description": "test event 2",
-    "address": "Westminster, London, UK",
-    "website": "https://example.com/test-event-2"
+    "website": "https://tpot.website/2025/08/14/events-2026/"
   }
 ];
